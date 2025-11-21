@@ -1,0 +1,18 @@
+"use client";
+
+import { createClient } from "@/lib/supabase/client";
+import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
+
+export function LogoutButton() {
+  const router = useRouter();
+
+  const logout = async () => {
+    const supabase = createClient();
+    await supabase.auth.signOut();
+    // Use window.location for full page reload to clear session
+    window.location.href = "/auth/login";
+  };
+
+  return <Button onClick={logout}>Logout</Button>;
+}
