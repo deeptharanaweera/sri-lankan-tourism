@@ -10,11 +10,12 @@ interface EditVehiclePageProps {
 }
 
 export default async function EditVehiclePage({ params }: EditVehiclePageProps) {
+  const { id } = await params;
   const supabase = await createClient();
   const { data: vehicle, error } = await supabase
     .from("vehicles")
     .select("*")
-    .eq("id", params.id)
+    .eq("id", id)
     .single();
 
   if (error || !vehicle) {

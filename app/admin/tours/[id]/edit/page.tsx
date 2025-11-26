@@ -10,11 +10,12 @@ interface EditTourPageProps {
 }
 
 export default async function EditTourPage({ params }: EditTourPageProps) {
+  const { id } = await params;
   const supabase = await createClient();
   const { data: tour, error } = await supabase
     .from("tours")
     .select("*")
-    .eq("id", params.id)
+    .eq("id", id)
     .single();
 
   if (error || !tour) {
