@@ -180,9 +180,19 @@ export default async function Home() {
             {featuredTours.length > 0 ? (
               featuredTours.map((tour) => (
                 <Card key={tour.id} className="overflow-hidden hover:shadow-lg transition-shadow">
-                  <div className="relative h-48 w-full bg-gradient-to-br from-primary/20 to-secondary/20">
-                    <div className="absolute inset-0 bg-black/20" />
-                    <div className="absolute top-4 right-4 bg-background/90 backdrop-blur px-3 py-1 rounded-full flex items-center gap-1">
+                  <div className="relative h-48 w-full bg-muted">
+                    <Image
+                      src={
+                        tour.image_url ||
+                        "https://images.unsplash.com/photo-1586516483559-326727195a1b?q=80&w=1600&auto=format&fit=crop"
+                      }
+                      alt={tour.title}
+                      fill
+                      className="object-cover transition-transform duration-300 group-hover:scale-105"
+                      sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                    />
+                    <div className="absolute inset-0 bg-black/10 transition-colors group-hover:bg-black/0" />
+                    <div className="absolute top-4 right-4 bg-background/90 backdrop-blur px-3 py-1 rounded-full flex items-center gap-1 z-10">
                       <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                       <span className="text-sm font-semibold">
                         {tour.rating ? Number(tour.rating).toFixed(1) : "4.5"}
