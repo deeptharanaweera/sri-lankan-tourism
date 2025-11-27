@@ -1,5 +1,6 @@
 "use client";
 
+import { AILoader } from "@/components/ai-loader";
 import { Navigation } from "@/components/navigation";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -9,7 +10,7 @@ import { Label } from "@/components/ui/label";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Calendar, Clock, DollarSign, Hotel, Loader2, MapPin, Sparkles, Star, Users, Utensils } from "lucide-react";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
@@ -78,7 +79,23 @@ export default function TripPlannerPage() {
   const [plan, setPlan] = useState<string>("");
   const [structuredPlan, setStructuredPlan] = useState<StructuredTripPlan | null>(null);
   const [loading, setLoading] = useState(false);
-  
+  const structuredPlanRef = useRef<HTMLDivElement>(null);
+  const simplePlanRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!loading && (structuredPlan || plan)) {
+      // Small timeout to ensure DOM is updated
+      const timer = setTimeout(() => {
+        if (structuredPlan && structuredPlanRef.current) {
+          structuredPlanRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+        } else if (plan && simplePlanRef.current) {
+          simplePlanRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [loading, structuredPlan, plan]);
+
   const {
     register,
     handleSubmit,
@@ -91,7 +108,7 @@ export default function TripPlannerPage() {
     setLoading(true);
     setPlan("");
     setStructuredPlan(null);
-    
+
     try {
       const response = await fetch("/api/trip-planner", {
         method: "POST",
@@ -124,7 +141,7 @@ export default function TripPlannerPage() {
   return (
     <div className="min-h-screen">
       <Navigation />
-      
+
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="space-y-8">
           {/* Header */}
@@ -238,26 +255,35 @@ export default function TripPlannerPage() {
 
             {/* Results - Side by side when no plan, full width when plan is shown */}
             {!structuredPlan ? (
-              <Card>
-                <CardHeader>
-                  <CardTitle>Your Personalized Trip Plan</CardTitle>
-                  <CardDescription>
-                    Your AI-generated itinerary will appear here
-                  </CardDescription>
+              <Card ref={simplePlanRef} className="relative overflow-hidden min-h-[400px] flex flex-col">
+                {/* Background Image for Empty State */}
+                {!loading && !plan && (
+                  <div className="absolute inset-0 z-0">
+                    <Image
+                      src="/images/trip-planner-bg.png"
+                      alt="Sri Lanka Scenery"
+                      fill
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-black/60" />
+                  </div>
+                )}
+
+                <CardHeader className="relative z-10">
+                  
                 </CardHeader>
-                <CardContent>
+                <CardContent className="relative z-10 flex-grow flex flex-col justify-center">
                   {loading ? (
-                    <div className="flex items-center justify-center py-12">
-                      <Loader2 className="h-8 w-8 animate-spin text-primary" />
-                    </div>
+                    <AILoader />
                   ) : plan ? (
                     <div className="prose prose-sm max-w-none dark:prose-invert">
                       <div className="whitespace-pre-wrap text-sm">{plan}</div>
                     </div>
                   ) : (
-                    <div className="text-center py-12 text-muted-foreground">
-                      <Sparkles className="h-12 w-12 mx-auto mb-4 opacity-50" />
-                      <p>Fill in the form and click "Generate Trip Plan" to get started</p>
+                    <div className="text-center py-12 text-white">
+                      <Sparkles className="h-16 w-16 mx-auto mb-6 opacity-80" />
+                      <h3 className="text-2xl font-semibold mb-2">Ready to Explore?</h3>
+                      <p className="text-lg opacity-90">Fill in the form and click "Generate Trip Plan" to start your Sri Lankan adventure.</p>
                     </div>
                   )}
                 </CardContent>
@@ -267,7 +293,7 @@ export default function TripPlannerPage() {
 
           {/* Structured Trip Plan - Full width when plan is available */}
           {structuredPlan && (
-            <div className="space-y-8">
+            <div ref={structuredPlanRef} className="space-y-8">
               {/* Trip Overview */}
               <Card>
                 <CardHeader>

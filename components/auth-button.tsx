@@ -6,10 +6,8 @@ import { UserMenu } from "./user-menu";
 export async function AuthButton() {
   const supabase = await createClient();
 
-  // You can also use getUser() which will be slower.
-  const { data } = await supabase.auth.getClaims();
 
-  const user = data?.claims;
+  const { data: { user } } = await supabase.auth.getUser();
 
   return user ? (
     <UserMenu user={user} />
