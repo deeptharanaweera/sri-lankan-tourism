@@ -180,7 +180,7 @@ export function TourDetailsView({ tour }: TourDetailsViewProps) {
                         <TabsContent value="itinerary" className="space-y-8">
                             <h3 className="text-2xl font-bold mb-6">Daily Itinerary</h3>
                             <div className="space-y-8">
-                                {itinerary.map((day: any, index: number) => (
+                                {itinerary.map((day: { day: number; title: string; description: string }, index: number) => (
                                     <div key={index} className="flex gap-6 relative">
                                         <div className="flex flex-col items-center">
                                             <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 text-primary font-bold z-10">
@@ -202,7 +202,7 @@ export function TourDetailsView({ tour }: TourDetailsViewProps) {
                         <TabsContent value="trip-includes">
                             <Card>
                                 <CardContent className="pt-6">
-                                    <h3 className="text-2xl font-bold mb-6">What's Included</h3>
+                                    <h3 className="text-2xl font-bold mb-6">What&apos;s Included</h3>
                                     <div className="grid sm:grid-cols-2 gap-4">
                                         {includes.map((item, i) => (
                                             <div key={i} className="flex items-start gap-3">
@@ -218,7 +218,7 @@ export function TourDetailsView({ tour }: TourDetailsViewProps) {
                         <TabsContent value="trip-excludes">
                             <Card>
                                 <CardContent className="pt-6">
-                                    <h3 className="text-2xl font-bold mb-6">What's Excluded</h3>
+                                    <h3 className="text-2xl font-bold mb-6">What&apos;s Excluded</h3>
                                     <div className="grid sm:grid-cols-2 gap-4">
                                         {excludes.map((item, i) => (
                                             <div key={i} className="flex items-start gap-3">

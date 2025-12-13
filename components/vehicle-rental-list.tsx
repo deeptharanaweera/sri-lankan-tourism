@@ -6,8 +6,6 @@ import { Navigation } from "@/components/navigation";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   Dialog,
   DialogContent,
@@ -15,6 +13,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { createClient } from "@/lib/supabase/client";
 import { Car, Fuel, Users } from "lucide-react";
 import Image from "next/image";
@@ -146,7 +146,7 @@ export function VehicleRentalList({ vehicles }: VehicleRentalListProps) {
 
     setSubmitting(false);
     setFeedback({ type: "success", message: "Vehicle booking submitted!" });
-    
+
     // Close modal after 2 seconds on success
     setTimeout(() => {
       setFormData(defaultForm);
@@ -171,8 +171,6 @@ export function VehicleRentalList({ vehicles }: VehicleRentalListProps) {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {availableVehicles.map((vehicle) => {
               const priceNumber = vehicle.price_per_day ? Number(vehicle.price_per_day) : null;
-              const isSelected = selectedVehicleId === vehicle.id;
-
               return (
                 <Card
                   key={vehicle.id}
