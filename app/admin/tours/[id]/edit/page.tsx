@@ -4,9 +4,9 @@ import { TourForm } from "@/components/tour-form";
 import { createClient } from "@/lib/supabase/server";
 
 interface EditTourPageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 export default async function EditTourPage({ params }: EditTourPageProps) {

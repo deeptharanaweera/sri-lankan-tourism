@@ -4,9 +4,9 @@ import { VehicleForm } from "@/components/vehicle-form";
 import { createClient } from "@/lib/supabase/server";
 
 interface EditVehiclePageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 export default async function EditVehiclePage({ params }: EditVehiclePageProps) {
