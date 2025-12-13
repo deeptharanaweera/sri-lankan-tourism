@@ -50,7 +50,7 @@ export function ReviewsList({ reviews, tours }: ReviewsListProps) {
   const [formData, setFormData] = useState<ReviewFormState>(defaultForm);
   const [submitting, setSubmitting] = useState(false);
   const [feedback, setFeedback] = useState<{ type: "success" | "error"; message: string } | null>(null);
-  const [displayedReviews, setDisplayedReviews] = useState<ReviewItem[]>(reviews);
+  const [displayedReviews] = useState<ReviewItem[]>(reviews);
 
   const tourOptions = useMemo(
     () => [{ id: "", title: "Select a tour" }, ...tours, { id: "custom", title: "Other (specify)" }],
@@ -110,8 +110,8 @@ export function ReviewsList({ reviews, tours }: ReviewsListProps) {
     const tourName = selectedTour
       ? selectedTour.title
       : formData.tourId === "custom"
-      ? formData.customTourName.trim()
-      : null;
+        ? formData.customTourName.trim()
+        : null;
 
     const { error } = await supabase.from("reviews").insert([
       {
@@ -172,11 +172,10 @@ export function ReviewsList({ reviews, tours }: ReviewsListProps) {
                             {[...Array(5)].map((_, index) => (
                               <Star
                                 key={index}
-                                className={`h-4 w-4 ${
-                                  index < review.rating
+                                className={`h-4 w-4 ${index < review.rating
                                     ? "fill-yellow-400 text-yellow-400"
                                     : "text-muted-foreground"
-                                }`}
+                                  }`}
                               />
                             ))}
                           </div>
@@ -278,11 +277,10 @@ export function ReviewsList({ reviews, tours }: ReviewsListProps) {
                         className="focus:outline-none"
                       >
                         <Star
-                          className={`h-6 w-6 ${
-                            index < formData.rating
+                          className={`h-6 w-6 ${index < formData.rating
                               ? "fill-yellow-400 text-yellow-400"
                               : "text-muted-foreground"
-                          }`}
+                            }`}
                         />
                       </button>
                     ))}

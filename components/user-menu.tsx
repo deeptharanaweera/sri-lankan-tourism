@@ -16,7 +16,6 @@ import Link from "next/link";
 interface UserMenuProps {
     user: {
         email?: string;
-        [key: string]: any;
     };
 }
 

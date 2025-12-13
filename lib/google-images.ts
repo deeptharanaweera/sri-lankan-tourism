@@ -3,10 +3,7 @@
  * Uses Google Custom Search API if available, otherwise falls back to a constructed URL
  */
 
-interface GoogleImageSearchResult {
-  imageUrl: string;
-  thumbnailUrl?: string;
-}
+
 
 /**
  * Get image URL from Google Search using Google Custom Search API
@@ -22,7 +19,7 @@ export async function getGoogleImageUrl(query: string): Promise<string> {
     try {
       const searchQuery = encodeURIComponent(query);
       const url = `https://www.googleapis.com/customsearch/v1?key=${apiKey}&cx=${searchEngineId}&q=${searchQuery}&searchType=image&num=1&safe=active`;
-      
+
       const response = await fetch(url);
       if (response.ok) {
         const data = await response.json();
@@ -41,8 +38,8 @@ export async function getGoogleImageUrl(query: string): Promise<string> {
     const encodedQuery = encodeURIComponent(query);
     // Using a service that can fetch Google image results
     // Note: This is a fallback and may have rate limits
-    const fallbackUrl = `https://www.googleapis.com/customsearch/v1?key=${apiKey || 'demo'}&cx=${searchEngineId || 'demo'}&q=${encodedQuery}&searchType=image&num=1`;
-    
+    // const fallbackUrl = `https://www.googleapis.com/customsearch/v1?key=${apiKey || 'demo'}&cx=${searchEngineId || 'demo'}&q=${encodedQuery}&searchType=image&num=1`;
+
     // If API keys are not available, use Unsplash as fallback with Google-style search
     // This ensures we always return a valid image URL
     return `https://source.unsplash.com/800x600/?${encodedQuery}`;
@@ -67,12 +64,12 @@ export async function getGoogleImageUrls(query: string, count: number = 1): Prom
     try {
       const searchQuery = encodeURIComponent(query);
       const url = `https://www.googleapis.com/customsearch/v1?key=${apiKey}&cx=${searchEngineId}&q=${searchQuery}&searchType=image&num=${Math.min(count, 10)}&safe=active`;
-      
+
       const response = await fetch(url);
       if (response.ok) {
         const data = await response.json();
         if (data.items && data.items.length > 0) {
-          return data.items.slice(0, count).map((item: any) => item.link);
+          return data.items.slice(0, count).map((item: { link: string }) => item.link);
         }
       }
     } catch (error) {
@@ -82,7 +79,7 @@ export async function getGoogleImageUrls(query: string, count: number = 1): Prom
 
   // Fallback: Return array with Unsplash URLs
   const encodedQuery = encodeURIComponent(query);
-  return Array.from({ length: count }, (_, i) => 
+  return Array.from({ length: count }, (_, i) =>
     `https://source.unsplash.com/800x600/?${encodedQuery}&sig=${i}`
   );
 }
