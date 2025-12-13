@@ -1,7 +1,5 @@
 "use client";
 
-import { cn } from "@/lib/utils";
-import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -12,9 +10,11 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { createClient } from "@/lib/supabase/client";
+import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export function LoginForm({
   className,
@@ -25,7 +25,6 @@ export function LoginForm({
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [checkingSession, setCheckingSession] = useState(true);
-  const router = useRouter();
   const searchParams = useSearchParams();
 
   // Check if user is already logged in
@@ -33,7 +32,7 @@ export function LoginForm({
     const checkSession = async () => {
       const supabase = createClient();
       const { data: { user } } = await supabase.auth.getUser();
-      
+
       if (user) {
         // User is already logged in, redirect them
         const redirect = searchParams?.get("redirect");
@@ -46,12 +45,12 @@ export function LoginForm({
             .select("role")
             .eq("id", user.id)
             .maybeSingle();
-          
-          const isAdmin = 
-            user.user_metadata?.role === "admin" || 
+
+          const isAdmin =
+            user.user_metadata?.role === "admin" ||
             profile?.role === "admin" ||
             user.email?.endsWith("@admin.srilankatourism.com");
-          
+
           if (isAdmin) {
             window.location.href = "/admin";
           } else {
@@ -73,11 +72,11 @@ export function LoginForm({
     setError(null);
 
     try {
-      const { error, data } = await supabase.auth.signInWithPassword({
+      const { error } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
-      
+
       if (error) {
         throw error;
       }
@@ -87,14 +86,14 @@ export function LoginForm({
 
       // Verify the user session is set
       const { data: { user }, error: userError } = await supabase.auth.getUser();
-      
+
       if (userError || !user) {
         throw new Error("Failed to establish session. Please try again.");
       }
 
       // Check redirect parameter or default to home
       const redirect = searchParams?.get("redirect");
-      
+
       if (redirect) {
         // Use window.location for full page reload to ensure session is recognized
         window.location.href = redirect;
@@ -105,12 +104,12 @@ export function LoginForm({
           .select("role")
           .eq("id", user.id)
           .maybeSingle();
-        
-        const isAdmin = 
-          user.user_metadata?.role === "admin" || 
+
+        const isAdmin =
+          user.user_metadata?.role === "admin" ||
           profile?.role === "admin" ||
           user.email?.endsWith("@admin.srilankatourism.com");
-        
+
         if (isAdmin) {
           // Use window.location for full page reload
           window.location.href = "/admin";

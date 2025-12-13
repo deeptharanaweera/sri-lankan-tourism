@@ -84,7 +84,6 @@ export function GalleryForm({ initialData, initialImages = [], mode = "edit" }: 
     const handleAdditionalFilesSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
         const files = Array.from(e.target.files || []);
         const validFiles: File[] = [];
-        const newPreviews: string[] = [];
 
         files.forEach(file => {
             if (!file.type.startsWith("image/")) {
@@ -224,7 +223,7 @@ export function GalleryForm({ initialData, initialImages = [], mode = "edit" }: 
                 const failed = results.filter(r => r.status === 'error');
 
                 if (failed.length > 0) {
-                    const errorMessages = failed.map(f => `${f.file}: ${(f as any).error}`).join("\n");
+                    const errorMessages = failed.map(f => `${f.file}: ${(f as { error: string }).error}`).join("\n");
                     alert(`Some images failed to upload:\n${errorMessages}`);
                 }
             }
