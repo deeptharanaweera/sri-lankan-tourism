@@ -1,15 +1,15 @@
 "use client";
 
-import { useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Edit, Trash2, Eye, Image as ImageIcon, Plus } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import { createClient } from "@/lib/supabase/client";
 import { deleteImage } from "@/lib/supabase/storage";
-import { useRouter } from "next/navigation";
+import { Edit, Image as ImageIcon, Plus, Trash2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 interface GalleryItem {
   id: string;
@@ -39,21 +39,21 @@ export function GalleryManager({ initialItems }: GalleryManagerProps) {
 
     setLoading(id);
     const supabase = createClient();
-    
+
     // Delete from database
     const { error } = await supabase.from("gallery").delete().eq("id", id);
 
     if (error) {
       console.error("Delete error:", error);
       let errorMessage = "Error deleting image: " + error.message;
-      
+
       if (error.message.includes("row-level security")) {
         errorMessage = "Permission denied. Please check:\n" +
           "1. You are logged in as an admin\n" +
           "2. Your user has 'admin' role in profiles table\n" +
           "3. RLS policies are configured correctly";
       }
-      
+
       alert(errorMessage);
       setLoading(null);
       return;
@@ -85,14 +85,14 @@ export function GalleryManager({ initialItems }: GalleryManagerProps) {
     if (error) {
       console.error("Update error:", error);
       let errorMessage = "Error updating image: " + error.message;
-      
+
       if (error.message.includes("row-level security")) {
         errorMessage = "Permission denied. Please check:\n" +
           "1. You are logged in as an admin\n" +
           "2. Your user has 'admin' role in profiles table\n" +
           "3. RLS policies are configured correctly";
       }
-      
+
       alert(errorMessage);
       setLoading(null);
       return;
