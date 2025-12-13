@@ -1,11 +1,11 @@
 "use client";
 
 import { Navigation } from "@/components/navigation";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Mail, Phone, MapPin, Send, MessageSquare } from "lucide-react";
+import { Mail, MapPin, MessageSquare, Phone, Send } from "lucide-react";
 import { useState } from "react";
 
 import { createClient } from "@/lib/supabase/client";
@@ -65,14 +65,14 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen">
       <Navigation />
-      
+
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="space-y-8">
           {/* Header */}
           <div className="text-center space-y-4">
             <h1 className="text-4xl md:text-5xl font-bold">Contact Us</h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Have questions or need assistance? We're here to help! Reach out to us through any of the channels below.
+              Have questions or need assistance? We&apos;re here to help! Reach out to us through any of the channels below.
             </p>
           </div>
 
@@ -151,7 +151,7 @@ export default function ContactPage() {
               <CardHeader>
                 <CardTitle>Send us a Message</CardTitle>
                 <CardDescription>
-                  Fill out the form below and we'll get back to you as soon as possible
+                  Fill out the form below and we&apos;ll get back to you as soon as possible
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -162,7 +162,7 @@ export default function ContactPage() {
                     </div>
                     <h3 className="text-xl font-semibold">Message Sent!</h3>
                     <p className="text-muted-foreground">
-                      Thank you for contacting us. We'll get back to you soon.
+                      Thank you for contacting us. We&apos;ll get back to you soon.
                     </p>
                   </div>
                 ) : (

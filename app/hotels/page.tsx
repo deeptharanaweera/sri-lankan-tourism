@@ -1,17 +1,17 @@
 "use client";
 
 import { Navigation } from "@/components/navigation";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Badge } from "@/components/ui/badge";
-import { Hotel, Loader2, MapPin, DollarSign, Star } from "lucide-react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { DollarSign, Hotel, Loader2, MapPin, Star } from "lucide-react";
+import Image from "next/image";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import Image from "next/image";
 
 const hotelSchema = z.object({
   location: z.string().min(1, "Location is required"),
@@ -45,7 +45,7 @@ export default function HotelsPage() {
   const [suggestions, setSuggestions] = useState<string>("");
   const [hotels, setHotels] = useState<HotelData[] | null>(null);
   const [loading, setLoading] = useState(false);
-  
+
   const {
     register,
     handleSubmit,
@@ -58,7 +58,7 @@ export default function HotelsPage() {
     setLoading(true);
     setSuggestions("");
     setHotels(null);
-    
+
     try {
       const response = await fetch("/api/hotels", {
         method: "POST",
@@ -91,7 +91,7 @@ export default function HotelsPage() {
   return (
     <div className="min-h-screen">
       <Navigation />
-      
+
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="space-y-8">
           {/* Header */}
@@ -111,7 +111,7 @@ export default function HotelsPage() {
               <CardHeader>
                 <CardTitle>Hotel Search Criteria</CardTitle>
                 <CardDescription>
-                  Tell us what you're looking for and we'll suggest the best hotels
+                  Tell us what you&apos;re looking for and we&apos;ll suggest the best hotels
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -222,7 +222,7 @@ export default function HotelsPage() {
                   ) : (
                     <div className="text-center py-12 text-muted-foreground">
                       <Hotel className="h-12 w-12 mx-auto mb-4 opacity-50" />
-                      <p>Fill in the form and click "Get Hotel Suggestions" to find perfect accommodations</p>
+                      <p>Fill in the form and click &quot;Get Hotel Suggestions&quot; to find perfect accommodations</p>
                     </div>
                   )}
                 </CardContent>
@@ -274,11 +274,10 @@ export default function HotelsPage() {
                               {[...Array(5)].map((_, i) => (
                                 <Star
                                   key={i}
-                                  className={`h-3 w-3 ${
-                                    i < (hotel.stars || 0)
+                                  className={`h-3 w-3 ${i < (hotel.stars || 0)
                                       ? "fill-yellow-400 text-yellow-400"
                                       : "text-muted-foreground"
-                                  }`}
+                                    }`}
                                 />
                               ))}
                             </div>
