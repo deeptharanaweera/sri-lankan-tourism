@@ -41,23 +41,26 @@ export function Navigation() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-1">
+          <div className="hidden md:flex items-center gap-6">
             {navItems.map((item) => {
               const Icon = item.icon;
               const isActive = pathname === item.href;
               return (
-                <Link key={item.href} href={item.href}>
-                  <Button
-                    variant={isActive ? "default" : "ghost"}
-                    size="sm"
-                    className={cn(
-                      "flex items-center gap-2",
-                      isActive && "bg-primary text-primary-foreground"
-                    )}
-                  >
-                    {Icon && <Icon className="h-4 w-4" />}
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={cn(
+                    "group flex items-center gap-2 text-sm font-medium transition-colors hover:text-primary",
+                    isActive ? "text-primary" : "text-muted-foreground"
+                  )}
+                >
+                  <span className="relative">
                     {item.label}
-                  </Button>
+                    <span className={cn(
+                      "absolute -bottom-1 left-0 h-0.5 w-full origin-left scale-x-0 bg-primary transition-transform duration-300 ease-out group-hover:scale-x-100",
+                      isActive && "scale-x-100"
+                    )} />
+                  </span>
                 </Link>
               );
             })}
@@ -68,7 +71,7 @@ export function Navigation() {
             <ThemeSwitcher />
             <AdminLink />
             <AuthButton />
-            
+
             {/* Mobile menu button */}
             <Button
               variant="ghost"

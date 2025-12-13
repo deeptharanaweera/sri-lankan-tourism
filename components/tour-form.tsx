@@ -1,26 +1,33 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { ArrowLeft, Upload, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, Upload, X } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { TagInput } from "@/components/ui/tag-input";
 import { createClient } from "@/lib/supabase/client";
 import { uploadImage } from "@/lib/supabase/storage";
+import { TourItem } from "@/types/tour";
 
 interface TourFormProps {
-  initialData?: TourFormState;
+  initialData?: Partial<TourItem>;
 }
 
 interface TourFormState {
   id?: string;
   title: string;
   description: string;
+  overview: string;
+  itinerary: string;
+  includes: string[];
+  excludes: string[];
+  gallery_urls: string[];
   duration: string;
   price: number | null;
   location: string;
@@ -33,6 +40,11 @@ interface TourFormState {
 const DEFAULT_STATE: TourFormState = {
   title: "",
   description: "",
+  overview: "",
+  itinerary: "",
+  includes: [],
+  excludes: [],
+  gallery_urls: [],
   duration: "",
   price: null,
   location: "",
@@ -51,11 +63,16 @@ export function TourForm({ initialData }: TourFormProps) {
     ...DEFAULT_STATE,
     ...initialData,
     description: initialData?.description ?? DEFAULT_STATE.description,
+    overview: initialData?.overview ?? DEFAULT_STATE.overview,
+    itinerary: initialData?.itinerary ?? DEFAULT_STATE.itinerary,
+    includes: initialData?.includes ?? DEFAULT_STATE.includes,
+    excludes: initialData?.excludes ?? DEFAULT_STATE.excludes,
+    gallery_urls: initialData?.gallery_urls ?? DEFAULT_STATE.gallery_urls,
     duration: initialData?.duration ?? DEFAULT_STATE.duration,
     location: initialData?.location ?? DEFAULT_STATE.location,
     highlights: initialData?.highlights ?? DEFAULT_STATE.highlights,
     image_url: initialData?.image_url ?? DEFAULT_STATE.image_url,
-    price: initialData?.price ?? DEFAULT_STATE.price,
+    price: initialData?.price !== undefined ? Number(initialData.price) : DEFAULT_STATE.price,
     max_group_size: initialData?.max_group_size ?? DEFAULT_STATE.max_group_size,
     is_active: initialData?.is_active ?? DEFAULT_STATE.is_active,
   });
@@ -116,6 +133,11 @@ export function TourForm({ initialData }: TourFormProps) {
       const payload = {
         title: formData.title.trim(),
         description: formData.description.trim() || null,
+        overview: formData.overview.trim() || null,
+        itinerary: formData.itinerary.trim() || null,
+        includes: formData.includes.length > 0 ? formData.includes : null,
+        excludes: formData.excludes.length > 0 ? formData.excludes : null,
+        gallery_urls: formData.gallery_urls.length > 0 ? formData.gallery_urls : null,
         duration: formData.duration.trim() || null,
         price: formData.price !== null ? Number(formData.price) : null,
         location: formData.location.trim() || null,
@@ -285,29 +307,26 @@ export function TourForm({ initialData }: TourFormProps) {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="highlights">Highlights (comma separated)</Label>
-                <Input
+                <Label htmlFor="highlights">Highlights</Label>
+                <TagInput
                   id="highlights"
-                  value={formData.highlights.join(", ")}
-                  onChange={(event) =>
+                  value={formData.highlights}
+                  onValueChange={(tags) =>
                     setFormData((previous) => ({
                       ...previous,
-                      highlights: event.target.value
-                        .split(",")
-                        .map((item) => item.trim())
-                        .filter(Boolean),
+                      highlights: tags,
                     }))
                   }
-                  placeholder="e.g., Cultural, Wildlife, Scenic"
+                  placeholder="Type literal and press Enter to add..."
                 />
               </div>
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="description">Description</Label>
+              <Label htmlFor="description">Short Description</Label>
               <textarea
                 id="description"
-                className="flex min-h-[120px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                className="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                 value={formData.description}
                 onChange={(event) =>
                   setFormData((previous) => ({
@@ -315,13 +334,95 @@ export function TourForm({ initialData }: TourFormProps) {
                     description: event.target.value,
                   }))
                 }
-                placeholder="Describe the tour experience"
+                placeholder="Brief summary for the card view"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="overview">Full Overview</Label>
+              <textarea
+                id="overview"
+                className="flex min-h-[120px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                value={formData.overview}
+                onChange={(event) =>
+                  setFormData((previous) => ({
+                    ...previous,
+                    overview: event.target.value,
+                  }))
+                }
+                placeholder="Detailed overview of the tour..."
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="itinerary">Itinerary (JSON format preferred)</Label>
+              <textarea
+                id="itinerary"
+                className="flex min-h-[150px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 font-mono"
+                value={formData.itinerary}
+                onChange={(event) =>
+                  setFormData((previous) => ({
+                    ...previous,
+                    itinerary: event.target.value,
+                  }))
+                }
+                placeholder='[{"day": 1, "title": "Arrival", "description": "..."}]'
+              />
+              <p className="text-xs text-muted-foreground">
+                Enter a valid JSON array for structured itinerary.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="includes">Includes</Label>
+                <TagInput
+                  id="includes"
+                  value={formData.includes}
+                  onValueChange={(tags) =>
+                    setFormData((previous) => ({
+                      ...previous,
+                      includes: tags,
+                    }))
+                  }
+                  placeholder="Type and press Enter to add..."
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="excludes">Excludes</Label>
+                <TagInput
+                  id="excludes"
+                  value={formData.excludes}
+                  onValueChange={(tags) =>
+                    setFormData((previous) => ({
+                      ...previous,
+                      excludes: tags,
+                    }))
+                  }
+                  placeholder="Type and press Enter to add..."
+                />
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="gallery_urls">Gallery Image URLs</Label>
+              <TagInput
+                id="gallery_urls"
+                value={formData.gallery_urls}
+                onValueChange={(tags) =>
+                  setFormData((previous) => ({
+                    ...previous,
+                    gallery_urls: tags,
+                  }))
+                }
+                placeholder="Type URL and press Enter..."
               />
             </div>
 
             <div className="grid md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="image">Upload Image</Label>
+                <Label htmlFor="image">Upload Main Image</Label>
                 <label
                   htmlFor="image"
                   className="flex h-32 cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-muted-foreground/25 hover:bg-muted/50"
@@ -344,7 +445,7 @@ export function TourForm({ initialData }: TourFormProps) {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="image_url">Or Image URL</Label>
+                <Label htmlFor="image_url">Or Main Image URL</Label>
                 <Input
                   id="image_url"
                   type="url"
@@ -416,5 +517,3 @@ export function TourForm({ initialData }: TourFormProps) {
     </div>
   );
 }
-
-

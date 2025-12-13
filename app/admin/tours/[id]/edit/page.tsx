@@ -42,10 +42,13 @@ export default async function EditTourPage({ params }: EditTourPageProps) {
           highlights: tour.highlights ?? [],
           image_url: tour.image_url ?? "",
           is_active: tour.is_active ?? true,
+          overview: tour.overview ?? "",
+          itinerary: tour.itinerary ?? "",
+          includes: tour.includes ?? [],
+          excludes: tour.excludes ?? [],
+          gallery_urls: tour.gallery_urls ?? [],
         }}
       />
     </div>
   );
 }
-
-

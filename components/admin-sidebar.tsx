@@ -1,30 +1,22 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { createClient } from "@/lib/supabase/client";
 import { cn } from "@/lib/utils";
 import {
-    Calendar,
-    Car,
-    Image,
-    LayoutDashboard,
-    LogOut,
-    Mail,
-    Menu,
-    MessageSquare,
-    Plane,
-    Shield,
-    X,
+  Calendar,
+  Car,
+  Image,
+  LayoutDashboard,
+  Mail,
+  Menu,
+  MessageSquare,
+  Plane,
+  Shield,
+  X,
 } from "lucide-react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
-
-interface AdminSidebarProps {
-  user: {
-    email?: string;
-  };
-}
 
 const menuItems = [
   {
@@ -64,17 +56,9 @@ const menuItems = [
   },
 ];
 
-export function AdminSidebar({ user }: AdminSidebarProps) {
+export function AdminSidebar() {
   const pathname = usePathname();
-  const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  const handleLogout = async () => {
-    const supabase = createClient();
-    await supabase.auth.signOut();
-    router.push("/");
-    router.refresh();
-  };
 
   return (
     <>
@@ -96,36 +80,22 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
       {/* Sidebar */}
       <aside
         className={cn(
-          "fixed top-0 left-0 z-40 h-screen w-64 bg-card border-r transition-transform",
+          "fixed top-0 left-0 z-40 h-screen w-64 bg-[#0f172a] text-slate-100 border-r border-slate-800 transition-transform duration-300 ease-in-out",
           "lg:translate-x-0",
           isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
         )}
       >
         <div className="flex h-full flex-col">
           {/* Header */}
-          <div className="flex h-16 items-center justify-between border-b px-6">
-            <div className="flex items-center gap-2">
-              <Shield className="h-6 w-6 text-primary" />
-              <span className="font-bold text-lg">Admin Panel</span>
+          <div className="flex h-16 items-center border-b border-slate-800 px-6">
+            <div className="flex items-center gap-2 text-white">
+              <Shield className="h-6 w-6 text-blue-500" />
+              <span className="font-bold text-xl tracking-tight">Admin Panel</span>
             </div>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="lg:hidden"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              <X className="h-5 w-5" />
-            </Button>
-          </div>
-
-          {/* User info */}
-          <div className="border-b px-6 py-4">
-            <p className="text-sm font-medium">{user.email}</p>
-            <p className="text-xs text-muted-foreground">Administrator</p>
           </div>
 
           {/* Navigation */}
-          <nav className="flex-1 space-y-1 px-4 py-4">
+          <nav className="flex-1 space-y-1 px-3 py-6">
             {menuItems.map((item) => {
               const Icon = item.icon;
               const isActive = pathname === item.href;
@@ -136,31 +106,21 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   <Button
-                    variant={isActive ? "secondary" : "ghost"}
+                    variant="ghost"
                     className={cn(
-                      "w-full justify-start gap-3",
-                      isActive && "bg-secondary font-semibold"
+                      "w-full justify-start gap-3 mb-1 font-medium transition-all duration-200",
+                      isActive
+                        ? "bg-blue-600/10 text-blue-400 hover:bg-blue-600/20 hover:text-blue-300 border-r-4 border-blue-500 rounded-r-none rounded-l-md"
+                        : "text-slate-400 hover:bg-slate-800 hover:text-slate-100"
                     )}
                   >
-                    <Icon className="h-5 w-5" />
+                    <Icon className={cn("h-5 w-5", isActive && "text-blue-400")} />
                     {item.title}
                   </Button>
                 </Link>
               );
             })}
           </nav>
-
-          {/* Footer */}
-          <div className="border-t p-4">
-            <Button
-              variant="ghost"
-              className="w-full justify-start gap-3"
-              onClick={handleLogout}
-            >
-              <LogOut className="h-5 w-5" />
-              Logout
-            </Button>
-          </div>
         </div>
       </aside>
 
