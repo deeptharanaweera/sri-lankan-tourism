@@ -1,6 +1,6 @@
 import { Navigation } from "@/components/navigation";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Plane, Users, Award, Heart, MapPin, Mail, Phone, Globe } from "lucide-react";
+import { Award, Globe, Heart, Mail, MapPin, Phone, Plane, Users } from "lucide-react";
 
 export default function AboutPage() {
   const stats = [
@@ -36,7 +36,7 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen">
       <Navigation />
-      
+
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="space-y-16">
           {/* Header */}
@@ -65,7 +65,7 @@ export default function AboutPage() {
                   traditional hospitality with modern convenience.
                 </p>
                 <p>
-                  With the integration of AI-powered trip planning and hotel suggestions, we're revolutionizing how
+                  With the integration of AI-powered trip planning and hotel suggestions, we&apos;re revolutionizing how
                   travelers discover and experience Sri Lanka. Our platform offers everything you need for a perfect
                   vacation - from curated tours and vehicle rentals to personalized itineraries and expert recommendations.
                 </p>
@@ -122,7 +122,7 @@ export default function AboutPage() {
               <CardContent className="space-y-4">
                 <p className="opacity-90">
                   To make Sri Lanka accessible to travelers worldwide by providing exceptional tours, reliable services,
-                  and innovative technology that simplifies trip planning. We're committed to promoting sustainable
+                  and innovative technology that simplifies trip planning. We&apos;re committed to promoting sustainable
                   tourism that benefits local communities while creating unforgettable experiences for our guests.
                 </p>
               </CardContent>
@@ -133,7 +133,7 @@ export default function AboutPage() {
           <section className="space-y-6">
             <div className="text-center space-y-2">
               <h2 className="text-3xl font-bold">Get in Touch</h2>
-              <p className="text-muted-foreground">We'd love to hear from you</p>
+              <p className="text-muted-foreground">We&apos;d love to hear from you</p>
             </div>
             <div className="grid md:grid-cols-3 gap-6">
               <Card>

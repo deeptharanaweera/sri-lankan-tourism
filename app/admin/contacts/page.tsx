@@ -1,6 +1,6 @@
-import { createClient } from "@/lib/supabase/server";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
+import { createClient } from "@/lib/supabase/server";
 import { Mail } from "lucide-react";
 
 export default async function ContactsManagementPage() {
@@ -26,7 +26,16 @@ export default async function ContactsManagementPage() {
         {/* Contacts List */}
         {contacts && contacts.length > 0 ? (
           <div className="space-y-4">
-            {contacts.map((contact: any) => (
+            {contacts.map((contact: {
+              id: string;
+              name: string;
+              is_read: boolean;
+              email: string;
+              phone?: string | null;
+              subject: string;
+              message: string;
+              created_at: string;
+            }) => (
               <Card key={contact.id}>
                 <CardContent className="p-6">
                   <div className="flex items-start justify-between">
