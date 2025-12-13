@@ -15,4 +15,5 @@ export interface TourItem {
     includes?: string[] | null;
     excludes?: string[] | null;
     gallery_urls?: string[] | null;
+    is_active?: boolean;
 }
