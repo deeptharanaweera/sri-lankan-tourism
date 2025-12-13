@@ -1,9 +1,5 @@
-import { createClient } from "@/lib/supabase/server";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { MessageSquare, Check, X } from "lucide-react";
 import { ReviewManager } from "@/components/review-manager";
+import { createClient } from "@/lib/supabase/server";
 
 export default async function ReviewsManagementPage() {
   const supabase = await createClient();

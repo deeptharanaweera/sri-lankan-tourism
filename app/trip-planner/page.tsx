@@ -270,7 +270,7 @@ export default function TripPlannerPage() {
                 )}
 
                 <CardHeader className="relative z-10">
-                  
+
                 </CardHeader>
                 <CardContent className="relative z-10 flex-grow flex flex-col justify-center">
                   {loading ? (
@@ -283,7 +283,7 @@ export default function TripPlannerPage() {
                     <div className="text-center py-12 text-white">
                       <Sparkles className="h-16 w-16 mx-auto mb-6 opacity-80" />
                       <h3 className="text-2xl font-semibold mb-2">Ready to Explore?</h3>
-                      <p className="text-lg opacity-90">Fill in the form and click "Generate Trip Plan" to start your Sri Lankan adventure.</p>
+                      <p className="text-lg opacity-90">Fill in the form and click &quot;Generate Trip Plan&quot; to start your Sri Lankan adventure.</p>
                     </div>
                   )}
                 </CardContent>

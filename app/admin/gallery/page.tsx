@@ -1,16 +1,14 @@
-import { createClient } from "@/lib/supabase/server";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Image as ImageIcon, Plus, Edit, Trash2, Eye } from "lucide-react";
-import Link from "next/link";
 import { GalleryManager } from "@/components/gallery-manager";
+import { Button } from "@/components/ui/button";
+import { createClient } from "@/lib/supabase/server";
+import { Plus } from "lucide-react";
+import Link from "next/link";
 
 export default async function GalleryManagementPage() {
   const supabase = await createClient();
 
   // Fetch gallery items
-  const { data: galleryItems, error } = await supabase
+  const { data: galleryItems } = await supabase
     .from("gallery")
     .select("*")
     .order("created_at", { ascending: false });
