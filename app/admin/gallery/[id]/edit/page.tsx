@@ -4,9 +4,9 @@ import { GalleryForm } from "@/components/gallery-form";
 import { createClient } from "@/lib/supabase/server";
 
 interface EditGalleryPageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 export default async function EditGalleryPage({ params }: EditGalleryPageProps) {
