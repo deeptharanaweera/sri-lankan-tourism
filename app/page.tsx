@@ -251,7 +251,7 @@ export default async function Home() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {featuredTours.length > 0 ? (
               featuredTours.map((tour) => (
-                <Card key={tour.id} className="overflow-hidden hover:shadow-lg transition-shadow">
+                <Card key={tour.id} className="overflow-hidden hover:shadow-lg transition-shadow flex flex-col h-full">
                   <div className="relative h-48 w-full bg-muted">
                     <Image
                       src={
@@ -273,12 +273,12 @@ export default async function Home() {
                   </div>
                   <CardHeader>
                     <CardTitle>{tour.title}</CardTitle>
-                    <CardDescription>
+                    <CardDescription className="line-clamp-2">
                       {tour.description || "Experience the best of Sri Lanka with this curated tour."}
                     </CardDescription>
                   </CardHeader>
-                  <CardContent>
-                    <div className="flex justify-between items-center">
+                  <CardContent className="flex flex-col flex-1">
+                    <div className="flex justify-between items-center mb-4">
                       <div className="flex items-center gap-4 text-sm text-muted-foreground">
                         {tour.duration && (
                           <span className="flex items-center gap-1">
@@ -291,7 +291,7 @@ export default async function Home() {
                         {tour.price ? `$${Number(tour.price).toFixed(2)}` : "Contact"}
                       </div>
                     </div>
-                    <Link href={`/tours/${tour.id}`} className="block mt-4">
+                    <Link href={`/tours/${tour.id}`} className="block mt-auto">
                       <Button className="w-full">View Tour</Button>
                     </Link>
                   </CardContent>
