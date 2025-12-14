@@ -1,12 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { HeroContent } from "@/components/hero-content";
 import { HeroSlideshow } from "@/components/hero-slideshow";
 import { Navigation } from "@/components/navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { createClient } from "@/lib/supabase/server";
-import { ArrowUpRight, Binoculars, Car, Clock, Landmark, Mountain, Plane, Sparkles, Star, Umbrella, Users } from "lucide-react";
+import { ArrowUpRight, Binoculars, Car, Clock, Facebook, Instagram, Landmark, Linkedin, Mountain, Plane, Sparkles, Star, Twitter, Umbrella, Users, Youtube } from "lucide-react";
 
 export default async function Home() {
   const supabase = await createClient();
@@ -43,10 +44,10 @@ export default async function Home() {
   const latestGalleryItems = latestGalleryResult.data ?? [];
 
   const stats = [
-    { label: "Active Tours", value: toursCountResult.count ?? 0, icon: Plane },
-    { label: "Gallery Items", value: galleryCountResult.count ?? 0, icon: Sparkles },
-    { label: "Vehicles", value: vehiclesCountResult.count ?? 0, icon: Car },
-    { label: "Approved Reviews", value: reviewsCountResult.count ?? 0, icon: Users },
+    { label: "Active Tours", value: toursCountResult.count ?? 0, icon: Plane, iconColor: "text-blue-600" },
+    { label: "Gallery Items", value: galleryCountResult.count ?? 0, icon: Sparkles, iconColor: "text-green-600" },
+    { label: "Vehicles", value: vehiclesCountResult.count ?? 0, icon: Car, iconColor: "text-orange-600" },
+    { label: "Approved Reviews", value: reviewsCountResult.count ?? 0, icon: Users, iconColor: "text-purple-600" },
   ];
 
   const experiences = [
@@ -55,6 +56,7 @@ export default async function Home() {
       title: "Cultural & Heritage Tours",
       description: "Journey through time as you explore the ancient cities of Anuradhapura and Polonnaruwa, climb the legendary Sigiriya Rock Fortress, and visit the sacred Temple of the Tooth.",
       linkText: "Explore History",
+      link: "/experiences/cultural-heritage",
       color: "text-amber-600",
       bg: "bg-amber-50"
     },
@@ -63,6 +65,7 @@ export default async function Home() {
       title: "Wildlife & Nature Safaris",
       description: "Embark on a thrilling safari in Yala National Park to spot elusive leopards, see vast herds of elephants in Udawalawe, and witness the majestic blue whales off the coast.",
       linkText: "Discover Wildlife",
+      link: "/experiences/wildlife-nature",
       color: "text-green-600",
       bg: "bg-green-50"
     },
@@ -71,6 +74,7 @@ export default async function Home() {
       title: "Hill Country & Tea Trails",
       description: "Experience the breathtaking beauty of the central highlands. Ride the scenic train to Ella, hike through lush green tea plantations in Nuwara Eliya, and discover misty waterfalls.",
       linkText: "See the Highlands",
+      link: "/experiences/hill-country",
       color: "text-emerald-600",
       bg: "bg-emerald-50"
     },
@@ -79,6 +83,7 @@ export default async function Home() {
       title: "Beach & Coastal Relaxation",
       description: "Unwind on the pristine golden sands of Sri Lanka's southern coast. From the surf paradise of Arugam Bay to the tranquil shores of Bentota and the historic charm of Galle Fort.",
       linkText: "Find Your Beach",
+      link: "/experiences/beach-coastal",
       color: "text-orange-500",
       bg: "bg-orange-50"
     }
@@ -114,39 +119,28 @@ export default async function Home() {
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-background">
         <HeroSlideshow
-          images={[
-            "https://www.srilanka.org.tr/images/dataResim/9047ba-e_dyijlwyaajgd1.jpg?q=80&w=1600&auto=format&fit=crop",
-            "https://i.ytimg.com/vi/FEAW5IbubXA/maxresdefault.jpg?q=80&w=1600&auto=format&fit=crop",
-            "https://www.gokitetours.com/wp-content/uploads/2025/01/1.-Sigiriya-Rock-Fortress.webp?q=80&w=1600&auto=format&fit=crop",
+          items={[
+            {
+              image: "https://besttimetovisitsrilanka.com/wp-content/uploads/2021/04/Ella-Sightseeing-Tour-Sri-Lanka.jpg",
+              title: "Ella",
+              subtitle: "The Hill Country Paradise",
+              location: "Badulla District, Uva Province"
+            },
+            {
+              image: "https://cdn.forevervacation.com/uploads/digital/assets/udawalawe-national-park.webp",
+              title: "Udawalawe National Park",
+              subtitle: "Witness Majestic Wildlife",
+              location: "Udawalawe, Sabaragamuwa & Uva"
+            },
+            {
+              image: "https://images6.alphacoders.com/420/420230.jpg",
+              title: "Sigiriya Rock Fortress",
+              subtitle: "The Eighth Wonder of the World",
+              location: "Dambulla, Central Province"
+            },
           ]}
         />
-        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
-          <div className="text-center space-y-8">
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
-              Discover the{" "}
-              <span className="bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-                Pearl of the Indian Ocean
-              </span>
-            </h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Experience the beauty, culture, and adventure of Sri Lanka with our curated tours and AI-powered travel planning
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/tours">
-                <Button size="lg" className="text-lg px-8 shadow-lg hover:shadow-xl transition-all">
-                  <Plane className="mr-2 h-5 w-5" />
-                  Explore Tours
-                </Button>
-              </Link>
-              <Link href="/trip-planner">
-                <Button size="lg" variant="outline" className="text-lg px-8 backdrop-blur-sm bg-background/50 hover:bg-background/80 transition-all">
-                  <Sparkles className="mr-2 h-5 w-5" />
-                  Plan Your Trip
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
+        <HeroContent />
       </section>
 
       {/* Stats Section */}
@@ -157,8 +151,8 @@ export default async function Home() {
               const Icon = stat.icon;
               return (
                 <div key={stat.label} className="text-center space-y-2 group">
-                  <div className="h-12 w-12 mx-auto rounded-full bg-primary/5 flex items-center justify-center group-hover:bg-primary/10 transition-colors">
-                    <Icon className="h-6 w-6 text-primary" />
+                  <div className="h-16 w-16 mx-auto rounded-full bg-primary/5 flex items-center justify-center group-hover:bg-primary/10 transition-colors">
+                    <Icon className={`h-10 w-10 ${stat.iconColor}`} />
                   </div>
                   <div className="text-3xl font-bold tracking-tight">
                     {typeof stat.value === "number" ? stat.value : stat.value}
@@ -175,8 +169,8 @@ export default async function Home() {
       <section className="py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="space-y-4 mb-16">
-            <div className="flex items-center gap-2 text-primary font-medium">
-              <span className="h-px w-8 bg-primary"></span>
+            <div className="flex items-center gap-2 text-blue-600 font-medium">
+              <span className="h-px w-8 bg-blue-600"></span>
               Experiences
             </div>
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight">Craft Your Perfect Sri Lankan Journey</h2>
@@ -198,7 +192,7 @@ export default async function Home() {
                     <p className="text-muted-foreground leading-relaxed">
                       {exp.description}
                     </p>
-                    <Link href="/tours" className={`inline-flex items-center text-sm font-medium ${exp.color} hover:underline`}>
+                    <Link href={exp.link} className={`inline-flex items-center text-sm font-medium ${exp.color} hover:underline`}>
                       {exp.linkText}
                       <ArrowUpRight className="ml-1 h-4 w-4" />
                     </Link>
@@ -297,8 +291,8 @@ export default async function Home() {
                         {tour.price ? `$${Number(tour.price).toFixed(2)}` : "Contact"}
                       </div>
                     </div>
-                    <Link href="/tours" className="block mt-4">
-                      <Button className="w-full">Book Now</Button>
+                    <Link href={`/tours/${tour.id}`} className="block mt-4">
+                      <Button className="w-full">View Tour</Button>
                     </Link>
                   </CardContent>
                 </Card>
@@ -388,9 +382,32 @@ export default async function Home() {
           <div className="grid md:grid-cols-4 gap-8">
             <div>
               <h3 className="font-bold text-lg mb-4">Sri Lanka Tourism</h3>
-              <p className="text-muted-foreground text-sm">
+              <p className="text-muted-foreground text-sm mb-6">
                 Your gateway to experiencing the beauty and culture of Sri Lanka
               </p>
+              <div className="flex space-x-4">
+                <Link href="#" className="text-muted-foreground hover:text-primary transition-colors">
+                  <Facebook className="h-8 w-8 text-blue-600" />
+                  <span className="sr-only">Facebook</span>
+                </Link>
+                <Link href="#" className="text-muted-foreground hover:text-primary transition-colors">
+                  <Twitter className="h-8 w-8 text-blue-400" />
+                  <span className="sr-only">Twitter</span>
+                </Link>
+                <Link href="#" className="text-muted-foreground hover:text-primary transition-colors">
+                  <Instagram className="h-8 w-8 text-pink-600" />
+                  <span className="sr-only">Instagram</span>
+                </Link>
+                <Link href="#" className="text-muted-foreground hover:text-primary transition-colors">
+                  <Linkedin className="h-8 w-8 text-blue-800" />
+                  <span className="sr-only">LinkedIn</span>
+                </Link>
+                <Link href="#" className="text-muted-foreground hover:text-primary transition-colors">
+                  <Youtube className="h-8 w-8 text-red-600" />
+                  <span className="sr-only">Youtube</span>
+                </Link>
+
+              </div>
             </div>
             <div>
               <h4 className="font-semibold mb-4">Quick Links</h4>
