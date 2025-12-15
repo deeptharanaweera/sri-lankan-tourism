@@ -150,7 +150,7 @@ export default function ContactPage() {
           >
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-sm font-medium mb-2">
               <Sparkles className="w-4 h-4 text-yello-400" />
-              <span>We're here to help</span>
+              <span>We&apos;re here to help</span>
             </div>
             <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
               Get in <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">Touch</span>
