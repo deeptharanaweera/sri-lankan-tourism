@@ -85,26 +85,7 @@ export default function AboutPage() {
     },
   ];
 
-  const teamMembers = [
-    {
-      name: "Arjuna Perera",
-      role: "Founder & CEO",
-      image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=800&auto=format&fit=crop",
-      bio: "With over 15 years in tourism, Arjuna leads our vision to showcase Sri Lanka to the world."
-    },
-    {
-      name: "Sarah Silva",
-      role: "Head of Operations",
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=800&auto=format&fit=crop",
-      bio: "Ensuring every journey runs smoothly, Sarah brings precision and care to our logistics."
-    },
-    {
-      name: "Dinesh Kumar",
-      role: "Lead Guide",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=800&auto=format&fit=crop",
-      bio: "An encyclopedia of Sri Lankan history, Dinesh makes every stone and statue come alive."
-    }
-  ];
+
 
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
@@ -210,7 +191,7 @@ export default function AboutPage() {
                   Founded in 2015, Sri Lanka Tourism started with a simple belief: that travel should be more than just visiting places; it should be about connecting with the soul of a destination.
                 </p>
                 <p>
-                  What began as a small team of travel enthusiasts has grown into a comprehensive platform that combines traditional Sri Lankan hospitality with cutting-edge technology. We've helped thousands of travelers discover the hidden waterfalls of Ella, the ancient ruins of Polonnaruwa, and the pristine beaches of Mirissa.
+                  What began as a small team of travel enthusiasts has grown into a comprehensive platform that combines traditional Sri Lankan hospitality with cutting-edge technology. We&apos;ve helped thousands of travelers discover the hidden waterfalls of Ella, the ancient ruins of Polonnaruwa, and the pristine beaches of Mirissa.
                 </p>
                 <div className="flex items-center gap-4 pt-4">
                   <div className="flex -space-x-4">
@@ -249,7 +230,7 @@ export default function AboutPage() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-tr from-black/40 to-transparent" />
                 <div className="absolute bottom-8 left-8 right-8 text-white">
-                  <p className="text-lg font-medium italic">"Travel is the only thing you buy that makes you richer."</p>
+                  <p className="text-lg font-medium italic">&quot;Travel is the only thing you buy that makes you richer.&quot;</p>
                 </div>
               </div>
               {/* Decorative elements */}
@@ -331,7 +312,7 @@ export default function AboutPage() {
             <Sparkles className="w-12 h-12 mx-auto text-yellow-300 mb-6" />
             <h2 className="text-3xl md:text-5xl font-bold">Our Mission</h2>
             <p className="text-xl md:text-2xl font-light leading-relaxed opacity-90">
-              "To make Sri Lanka accessible to travelers worldwide by providing exceptional tours, reliable services, and innovative technology that simplifies trip planning."
+              &quot;To make Sri Lanka accessible to travelers worldwide by providing exceptional tours, reliable services, and innovative technology that simplifies trip planning.&quot;
             </p>
             <div className="pt-8">
               <Button size="lg" variant="secondary" className="text-lg px-8 rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all">
@@ -347,7 +328,7 @@ export default function AboutPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16 space-y-4">
             <h2 className="text-3xl md:text-4xl font-bold">Get in Touch</h2>
-            <p className="text-muted-foreground">Have questions? We're here to help.</p>
+            <p className="text-muted-foreground">Have questions? We&apos;re here to help.</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
