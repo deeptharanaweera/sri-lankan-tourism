@@ -265,7 +265,7 @@ export function ReviewsList({ reviews, tours }: ReviewsListProps) {
                       </div>
                     )}
                     <p className="text-muted-foreground text-sm leading-relaxed min-h-[80px]">
-                      "{review.comment}"
+                      &quot;{review.comment}&quot;
                     </p>
                     <div className="flex items-center gap-2 text-xs text-muted-foreground pt-4 border-t border-border/50">
                       <Calendar className="h-3 w-3" />
