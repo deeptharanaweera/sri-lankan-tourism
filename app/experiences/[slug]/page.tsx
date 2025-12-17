@@ -49,9 +49,9 @@ const experiences: Record<string, ExperienceData> = {
             },
         ],
         gallery: [
-            "https://www.gokitetours.com/wp-content/uploads/2025/01/1.-Sigiriya-Rock-Fortress.webp?q=80&w=800&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1548013146-72479768bada?q=80&w=800&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1578509311666-4c4f923e4b47?q=80&w=800&auto=format&fit=crop",
+            "https://dp25s5awwjwnq.cloudfront.net/2018/03/shutterstock_202544380-2.jpg",
+            "https://www.ceylontraveldream.com/images/sri-lanka-tours/cultural-tours-in-sri-lanka/cultural-tours-in-sri-lanka.jpg",
+            "https://routes.travel/wp-content/uploads/2023/05/Rich-Cultural-and-Heritage-Sites2.png.webp",
         ],
     },
     "wildlife-nature": {
@@ -60,7 +60,7 @@ const experiences: Record<string, ExperienceData> = {
         description:
             "Sri Lanka is one of the best places in Asia for wildlife. From the leopards of Yala to the elephant gatherings in Minneriya and the blue whales of Mirissa, prepare for unforgettable encounters with nature.",
         heroImage:
-            "https://i.ytimg.com/vi/FEAW5IbubXA/maxresdefault.jpg?q=80&w=1600&auto=format&fit=crop",
+            "https://www.bestoflanka.com/images/slider/photographic_tours/photography_tour_optionII_11nights/01.jpg",
         highlights: [
             "Spot leopards in Yala National Park",
             "Watch elephant herds in Udawalawe",
@@ -81,9 +81,9 @@ const experiences: Record<string, ExperienceData> = {
             },
         ],
         gallery: [
-            "https://images.unsplash.com/photo-1560969184-10fe8719e654?q=80&w=800&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1582046420557-2af9e2730a04?q=80&w=800&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1534947913387-a2267d30f576?q=80&w=800&auto=format&fit=crop",
+            "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/30/b9/0b/21/caption.jpg?w=1200&h=-1&s=1",
+            "https://www.world-tourism.org/wp-content/uploads/2025/11/udawalawa-national-park-safari-tour-from-ella.jpg",
+            "https://thesrilankatravelblog.com/wp-content/uploads/2022/01/protect-the-environment-on-your-sri-lanka-wildlife-safari-slider-1.jpg",
         ],
     },
     "hill-country": {
@@ -92,7 +92,7 @@ const experiences: Record<string, ExperienceData> = {
         description:
             "Escape to the cool climes of the central highlands. Ride the famous blue train through breathtaking landscapes, hike to waterfalls, and sip fresh Ceylon tea right where it's grown.",
         heroImage:
-            "https://images.unsplash.com/photo-1588661730097-f83cb48039e1?q=80&w=1600&auto=format&fit=crop",
+            "https://www.thesrilankatravelblog.com/wp-content/uploads/2024/03/top-6-things-to-do-in-sri-lankas-hill-country-header.jpg",
         highlights: [
             "Ride the scenic Kandy to Ella train",
             "Visit a tea factory and plantation in Nuwara Eliya",
@@ -113,9 +113,9 @@ const experiences: Record<string, ExperienceData> = {
             },
         ],
         gallery: [
-            "https://images.unsplash.com/photo-1590605912448-4cb296dfa12d?q=80&w=800&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1587595431973-160d0d94add1?q=80&w=800&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1546252989-73e44081c7e9?q=80&w=800&auto=format&fit=crop",
+            "https://ychef.files.bbci.co.uk/1280x720/p0ktylfg.jpg",
+            "https://www.andbeyond.com/wp-content/uploads/sites/5/sri-lanka-hill-country-hatton-tea-plantation.jpg",
+            "https://www.thetimes.com/imageserver/image/%2Fmethode%2Fsundaytimes%2Fprod%2Fweb%2Fbin%2F96a2c438-91c1-11ed-b849-7c425fb89a82.jpg?crop=2172%2C3258%2C1898%2C8",
         ],
     },
     "beach-coastal": {
@@ -124,7 +124,7 @@ const experiences: Record<string, ExperienceData> = {
         description:
             "With over 1,300km of coastline, Sri Lanka is a beach lover's paradise. Whether you want to surf the waves, relax under a palm tree, or enjoy vibrant beach nightlife, there's a perfect spot for you.",
         heroImage:
-            "https://images.unsplash.com/photo-1552554035-644eb9852093?q=80&w=1600&auto=format&fit=crop",
+            "https://mediawtravel.s3.ap-southeast-1.amazonaws.com/wp-content/uploads/2025/01/13224837/304441-Best-Beaches-in-Sri-Lanka.jpg",
         highlights: [
             "Surf the waves at Arugam Bay",
             "Relax on the pristine sands of Mirissa and Unawatuna",
@@ -145,9 +145,9 @@ const experiences: Record<string, ExperienceData> = {
             },
         ],
         gallery: [
-            "https://images.unsplash.com/photo-1536761001546-b089c8c935bc?q=80&w=800&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1587352352843-ac80a9d24a6a?q=80&w=800&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1566373738586-cf18dc7df84d?q=80&w=800&auto=format&fit=crop",
+            "https://nexttravelsrilanka.com/wp-content/uploads/2023/02/Tangalle.jpg",
+            "https://tz-mag-media.s3.ap-southeast-1.amazonaws.com/wp-content/uploads/2023/10/09105830/Sri-Lanka-WP-2.jpg",
+            "https://www.srilankalocaltours.com/wp-content/uploads/Sri-Lanka-Wildlife-Blissful-Beaches-Sri-Lanka-Beach-Tours.jpg",
         ],
     },
 };
