@@ -36,9 +36,10 @@ const staggerContainer = {
 
 export default function ContactPage() {
   const supabase = createClient();
-  const { scrollYProgress } = useScroll();
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
+  const { scrollY, scrollYProgress } = useScroll();
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0.5]);
   const heroScale = useTransform(scrollYProgress, [0, 0.2], [1, 0.95]);
+  const heroY = useTransform(scrollY, [0, 500], [0, 150]);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -129,10 +130,10 @@ export default function ContactPage() {
       <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden">
         <motion.div
           className="absolute inset-0 z-0"
-          style={{ opacity: heroOpacity, scale: heroScale }}
+          style={{ opacity: heroOpacity, scale: heroScale, y: heroY }}
         >
           <Image
-            src="https://media.licdn.com/dms/image/v2/D5612AQHNEh2Xsr1ZiQ/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1728371559605?e=2147483647&v=beta&t=qI3tnEmXbZj34YSw0Zx4LwB2oK_dLKBaE28gfj1Us70"
+            src="/images/contact_bg.jpg"
             alt="Sri Lanka Support"
             fill
             className="object-cover"

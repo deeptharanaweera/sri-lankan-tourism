@@ -44,7 +44,7 @@ const staggerContainer = {
 
 export default function AboutPage() {
   const { scrollYProgress } = useScroll();
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0.5]);
   const heroScale = useTransform(scrollYProgress, [0, 0.2], [1, 0.95]);
 
   const stats = [
@@ -98,7 +98,7 @@ export default function AboutPage() {
           style={{ opacity: heroOpacity, scale: heroScale }}
         >
           <Image
-            src="https://t4.ftcdn.net/jpg/03/22/53/53/360_F_322535378_f2I0DBWZpMIUz6DQdFGzBgasc9uE3CKY.jpg"
+            src="/images/about_bg.jpg"
             alt="Sri Lanka Scenery"
             fill
             className="object-cover"
