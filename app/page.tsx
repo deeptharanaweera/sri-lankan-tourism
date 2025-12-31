@@ -10,6 +10,8 @@ import { ScrollAnimation } from "@/components/ui/scroll-animation";
 import { createClient } from "@/lib/supabase/server";
 import { ArrowUpRight, Binoculars, Car, Clock, Facebook, Instagram, Landmark, Linkedin, Mountain, Plane, Sparkles, Star, Twitter, Umbrella, Users, Youtube } from "lucide-react";
 
+import { NewYearIntro } from "@/components/new-year-intro";
+
 export default async function Home() {
   const supabase = await createClient();
 
@@ -115,6 +117,7 @@ export default async function Home() {
 
   return (
     <div className="min-h-screen">
+      <NewYearIntro />
       <Navigation />
 
       {/* Hero Section */}
