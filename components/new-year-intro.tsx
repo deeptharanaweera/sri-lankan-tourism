@@ -14,10 +14,10 @@ export function NewYearIntro({ onComplete }: { onComplete?: () => void }) {
     useEffect(() => {
         // 1. Show 2025 (3s) -> Transition
         const timer1 = setTimeout(() => setStage("transition"), 3000);
-        
+
         // 2. Horizon expansion (1.5s) -> 2026
         const timer2 = setTimeout(() => setStage("2026"), 4500);
-        
+
         // 3. Show 2026 (4.5s) -> Start Exit Animation (Erase effect)
         const timer3 = setTimeout(() => setStage("exit"), 9000);
 
@@ -33,15 +33,15 @@ export function NewYearIntro({ onComplete }: { onComplete?: () => void }) {
 
     // --- ANIMATION VARIANTS ---
     const containerVariants = {
-        visible: { 
+        visible: {
             clipPath: "inset(0% 0% 0% 0%)", // Fully visible
         },
-        exit: { 
+        exit: {
             // The "Erase" Effect: Wipes the screen upward to reveal content underneath
-            clipPath: "inset(0% 0% 100% 0%)", 
-            transition: { 
-                duration: 1.5, 
-                ease: [0.76, 0, 0.24, 1] // Dramatic ease-in-out
+            clipPath: "inset(0% 0% 100% 0%)",
+            transition: {
+                duration: 1.5,
+                ease: [0.76, 0, 0.24, 1] as [number, number, number, number] // Dramatic ease-in-out
             }
         }
     };
@@ -91,7 +91,7 @@ export function NewYearIntro({ onComplete }: { onComplete?: () => void }) {
             {/* --- CONTENT LAYER --- */}
             <div className="relative z-20 w-full h-full flex flex-col items-center justify-center">
                 <AnimatePresence mode="wait">
-                    
+
                     {/* STAGE 1: 2025 */}
                     {stage === "2025" && (
                         <motion.div
@@ -113,7 +113,7 @@ export function NewYearIntro({ onComplete }: { onComplete?: () => void }) {
                     {/* STAGE 2 & 3: 2026 */}
                     {(stage === "transition" || stage === "2026" || stage === "exit") && (
                         <div className="relative flex flex-col items-center justify-center w-full">
-                            
+
                             {/* Horizon Line */}
                             <motion.div
                                 className="absolute h-[3px] bg-gradient-to-r from-transparent via-amber-400 to-transparent shadow-[0_0_100px_rgba(251,191,36,0.8)] z-30"
