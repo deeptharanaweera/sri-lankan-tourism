@@ -23,7 +23,7 @@ export async function POST(request: Request) {
     //
     const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
-    const prompt = `You are a travel expert specializing in Sri Lanka tourism. Create a detailed, personalized trip plan as a JSON object based on the following requirements:
+    const prompt = `You are a travel expert specializing in Sri Heaven Lanka tourism. Create a detailed, personalized trip plan as a JSON object based on the following requirements:
 
 Duration: ${duration}
 Budget: ${budget}
@@ -127,7 +127,7 @@ Return ONLY valid JSON object, no additional text.`;
     if (tripPlan.destinations && Array.isArray(tripPlan.destinations)) {
       tripPlan.destinations = await Promise.all(
         tripPlan.destinations.map(async (dest: Destination) => {
-          const imageQuery = `${dest.name} Sri Lanka tourism`;
+          const imageQuery = `${dest.name} Sri Heaven Lanka tourism`;
           const imageUrl = await getGoogleImageUrl(imageQuery);
           return {
             ...dest,

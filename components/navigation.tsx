@@ -5,18 +5,19 @@ import { AuthButton } from "@/components/auth-button.client";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Calendar, Car, Image, Info, Mail, Menu, MessageSquare, Plane, Sparkles, X } from "lucide-react";
+import { Calendar, Car, Home, Image as ImageIcon, Info, Mail, Menu, MessageSquare, Plane, Sparkles, X } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 const navItems = [
-  { href: "/", label: "Home" },
+  { href: "/", label: "Home", icon: Home },
   { href: "/tours", label: "Tours", icon: Plane },
   { href: "/vehicle-rental", label: "Vehicle Rental", icon: Car },
   { href: "/trip-planner", label: "AI Trip Planner", icon: Sparkles },
   { href: "/hotels", label: "Hotels", icon: Calendar },
-  { href: "/gallery", label: "Gallery", icon: Image },
+  { href: "/gallery", label: "Gallery", icon: ImageIcon },
   { href: "/reviews", label: "Reviews", icon: MessageSquare },
   { href: "/about", label: "About", icon: Info },
   { href: "/contact", label: "Contact", icon: Mail },
@@ -34,9 +35,11 @@ export function Navigation() {
             {/* Logo */}
             <Link href="/" className="flex items-center space-x-2">
               <div className="flex items-center space-x-2">
-                <Plane className="h-6 w-6 text-primary" />
-                <span className="text-xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-                  Sri Lanka Tourism
+                <div className="relative h-10 w-10 sm:h-[60px] sm:w-[60px]">
+                  <Image src="/images/SriHeavenLankaIcon.png" alt="Logo" fill className="object-contain" />
+                </div>
+                <span className=" sm:block text-xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+                  Sri Heaven Lanka
                 </span>
               </div>
             </Link>
@@ -68,9 +71,11 @@ export function Navigation() {
 
             {/* Right side actions */}
             <div className="flex items-center gap-2">
-              <ThemeSwitcher />
-              <AdminLink />
-              <AuthButton />
+              <div className="hidden md:flex items-center gap-2">
+                <ThemeSwitcher />
+                <AdminLink />
+                <AuthButton />
+              </div>
 
               {/* Mobile menu button */}
               <Button
@@ -80,9 +85,9 @@ export function Navigation() {
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               >
                 {mobileMenuOpen ? (
-                  <X className="h-5 w-5" />
+                  <X className="h-8 w-8" />
                 ) : (
-                  <Menu className="h-5 w-5" />
+                  <Menu className="h-8 w-8" />
                 )}
               </Button>
             </div>
@@ -113,6 +118,17 @@ export function Navigation() {
                   </Link>
                 );
               })}
+
+              <div className="border-t pt-4 px-2 space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-medium">Theme</span>
+                  <ThemeSwitcher />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <AdminLink />
+                  <AuthButton />
+                </div>
+              </div>
             </div>
           )}
         </div>

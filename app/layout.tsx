@@ -1,6 +1,7 @@
+import { Footer } from "@/components/footer";
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
 import { ThemeProvider } from "next-themes";
+import { Geist } from "next/font/google";
 import "./globals.css";
 
 const defaultUrl = process.env.VERCEL_URL
@@ -9,8 +10,11 @@ const defaultUrl = process.env.VERCEL_URL
 
 export const metadata: Metadata = {
   metadataBase: new URL(defaultUrl),
-  title: "Sri Lanka Tourism - Discover the Pearl of the Indian Ocean",
+  title: "Sri Heaven Lanka - Discover the Pearl of the Indian Ocean",
   description: "Experience the beauty, culture, and adventure of Sri Lanka with our curated tours, AI-powered trip planning, vehicle rentals, and hotel suggestions.",
+  icons: {
+    icon: "/images/SriHeavenLankaLogo.png",
+  },
 };
 
 const geistSans = Geist({
@@ -34,6 +38,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

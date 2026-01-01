@@ -188,7 +188,7 @@ export default function AboutPage() {
               </div>
               <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
                 <p>
-                  Founded in 2015, Sri Lanka Tourism started with a simple belief: that travel should be more than just visiting places; it should be about connecting with the soul of a destination.
+                  Founded in 2015, Sri Heaven Lanka started with a simple belief: that travel should be more than just visiting places; it should be about connecting with the soul of a destination.
                 </p>
                 <p>
                   What began as a small team of travel enthusiasts has grown into a comprehensive platform that combines traditional Sri Lankan hospitality with cutting-edge technology. We&apos;ve helped thousands of travelers discover the hidden waterfalls of Ella, the ancient ruins of Polonnaruwa, and the pristine beaches of Mirissa.
