@@ -12,9 +12,6 @@ export const metadata: Metadata = {
   metadataBase: new URL(defaultUrl),
   title: "Sri Heaven Lanka - Discover the Pearl of the Indian Ocean",
   description: "Experience the beauty, culture, and adventure of Sri Lanka with our curated tours, AI-powered trip planning, vehicle rentals, and hotel suggestions.",
-  icons: {
-    icon: "/images/SriHeavenLankaLogo.png",
-  },
 };
 
 const geistSans = Geist({
